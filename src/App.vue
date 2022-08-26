@@ -2,10 +2,10 @@
   <div id="app">
     <div class="container">
       <TheHeader />
-      <div v-if="items.length" class="products">
-        <ProductCard v-for="item in items" :key="item.id" :item="item" />
-        <template v-if="navItems.length">
-          <ProductCard v-for="item in navItems" :key="item.id" :item="item" is-nav />
+      <div v-if="items1.length" :class="['products', {'products--loaded': items1.length}]">
+        <ProductCard v-for="item in items1" :key="item.id" :item="item" />
+        <template v-if="items2.length">
+          <ProductCard v-for="item in items2" :key="item.id" :item="item" is-nav />
         </template>
       </div>
       <div v-else class="loader">DUBAI</div>
@@ -29,9 +29,15 @@ export default {
     ProductCard
   },
   data: () => ({
-    items,
-    navItems
-  })
+    items1: [],
+    items2: []
+  }),
+  created() {
+    setTimeout(() => {
+      this.items1 = items
+      this.items2 = navItems
+    }, 1000);
+  }
 }
 </script>
 
@@ -66,6 +72,16 @@ body {
   padding: 60px 0;
   display: flex;
   overflow-x: scroll;
+  animation: slide-in 0.5s;
+
+}
+@keyframes slide-in {
+  0% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 .loader {
   font-size: 60px;

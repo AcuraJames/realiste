@@ -9,7 +9,14 @@
       <div class="product-card__description">{{ item.description }}</div>
       <button class="product-card__action">Посмотреть</button>
       <div class="product-card__image">
-        <img :src="require(`../assets/${item.img}`)" height="164px">
+        <template v-if="Array.isArray(item.img)">
+          <div class="image-group">
+            <img v-for="(img, idx) in item.img" :key="idx" :src="require(`../assets/${img}`)" height="76px" width="138px" />
+          </div>
+        </template>
+        <template v-else>
+          <img :src="require(`../assets/${item.img}`)" height="164px" />
+        </template>
       </div>
     </template>
     <template v-else>
@@ -98,6 +105,14 @@ export default {
 .product-card__image img {
   width: 100%;
   border-radius: 20px;
+}
+.image-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+.image-group img {
+  width: calc(50% - 10px);
+  margin: 5px;
 }
 
 .product-card--nav {

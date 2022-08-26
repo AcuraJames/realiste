@@ -18,7 +18,7 @@ export const items =  [
     badge: '30',
     title: 'Самые престижные проекты',
     description: 'Квартиры в домах где живут миллионеры',
-    img: 'minimap-min.jpg'
+    img: ['dubai1.webp', 'dubai2.webp', 'dubai3.webp', 'dubai4.webp']
   },
 ]
 
